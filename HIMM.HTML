@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Valentine’s Day ❤️</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    /* =====================
+       EASY COLORS TO CHANGE
+       ===================== */
+    :root {
+      --peach: #ffd6c9;
+      --lavender: #e6d9ff;
+      --pink: #ff9eb5;
+      --deep-pink: #ff5f8a;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "Comic Sans MS", "Poppins", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, var(--peach), var(--lavender));
+      overflow: hidden;
+    }
+
+    /* =====================
+       SLIDES CONTAINER
+       ===================== */
+    .slides {
+      display: flex;
+      width: 600vw; /* 6 slides */
+      height: 100vh;
+      transition: transform 0.6s ease;
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    h1, h2 {
+      color: #ff4f7c;
+      margin-top: 20px;
+    }
+
+    p {
+      color: #5a3a4a;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 12px auto;
+    }
+
+    button {
+      background: linear-gradient(135deg, #ff9eb5, #ff5f8a);
+      border: none;
+      color: white;
+      padding: 14px 22px;
+      border-radius: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .nav {
+      position: fixed;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 14px;
+      z-index: 1000;
+    }
+
+    .nav button {
+      padding: 10px 18px;
+      font-size: 0.9rem;
+    }
+
+    /* =====================
+       FLOATING HEARTS + TEDDIES
+       ===================== */
+    .float {
+      position: absolute;
+      bottom: -50px;
+      font-size: 24px;
+      animation: floatUp linear infinite;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 0.9; }
+      to {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* =====================
+       PHOTO FLOATING STYLE
+       ===================== */
+    .photo-float {
+      position: absolute;
+      width: 90px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+      animation: photoDrift linear infinite;
+      opacity: 0.95;
+    }
+
+    @keyframes photoDrift {
+      from {
+        transform: translateY(0) rotate(-6deg);
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      to {
+        transform: translateY(-120vh) rotate(6deg);
+        opacity: 0;
+      }
+    }
+
+    /* =====================
+       GALLERY GRID
+       ===================== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 16px;
+      max-width: 900px;
+      margin: 30px auto 0;
+      padding: 0 10px;
+    }
+
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* =====================
+       LOVE LETTER POPUP
+       ===================== */
+    .letter-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 214, 201, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      padding: 20px;
+    }
+
+    .letter {
+      background: #fff;
+      border-radius: 24px;
+      padding: 26px 22px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      animation: popIn 0.4s ease;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .letter h3 {
+      color: #ff4f7c;
+      margin-top: 0;
+    }
+
+    .letter p {
+      font-size: 1rem;
+    }
+
+    .close-btn {
+      margin-top: 18px;
+      background: linear-gradient(135deg, #b28cff, #ff9eb5);
+    }
+
+    /* =====================
+       SLIDE SPECIFIC STYLES
+       ===================== */
+    .hero-title {
+      font-size: 2.2rem;
+      margin-top: 80px;
+    }
+
+    .hero-sub {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+
+    .big-heart {
+      font-size: 4rem;
+      margin-top: 20px;
+      animation: heartbeat 1.6s infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .reasons {
+      max-width: 650px;
+      margin: 20px auto 0;
+      text-align: left;
+      background: rgba(255,255,255,0.35);
+      border-radius: 20px;
+      padding: 18px 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .reasons li {
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+    }
+
+    .center-box {
+      background: rgba(255,255,255,0.4);
+      border-radius: 24px;
+      padding: 24px 20px;
+      max-width: 700px;
+      margin: 60px auto 0;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+    }
+
+    /* =====================
+       MOBILE TWEAKS
+       ===================== */
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.8rem;
+        margin-top: 60px;
+      }
+
+      .photo-float {
+        width: 70px;
+        height: 95px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================
+       SLIDES WRAPPER
+       ===================== -->
+  <div class="slides" id="slides">
+
+    <!-- =====================
+         SLIDE 1: LANDING
+         ===================== -->
+    <section class="slide">
+      <h1 class="hero-title">Happy Valentine’s Week ❤️</h1>
+      <p class="hero-sub">Adi, this little website is just for you 🧸💖</p>
+      <div class="big-heart">💗</div>
+
+      <div class="center-box">
+        <p>
+          Scroll or tap next because I made something cute, soft,
+          cozy, and full of us 🫶🌸
+        </p>
+        <button onclick="nextSlide()">Start 💌</button>
+      </div>
+    </section>
+
+    <!-- =====================
+         SLIDE 2: REASONS I LOVE YOU
+         ===================== -->
+    <section class="slide">
+      <h2>Reasons I Love You 💕</h2>
+
+      <ul class="reasons">
+        <!-- ✏️ EDIT THESE LINES -->
+        <li>💗 You make me feel safe, loved, and understood</li>
+        <li>🧸 Your smile fixes bad days instantly</li>
+        <li>🌸 You’re my favorite person to talk to</li>
+        <li>💞 You never let me go home with a sad face</li>
+        <li>✨ I really love you.I dont need any reasons to love you</li>
+      </ul>
+
+      <button onclick="nextSlide()">Next ➜</button>
+    </section>
+
+    <!-- =====================
+         SLIDE 3: GALLERY
+         ===================== -->
+    <section class="slide">
+      <h2>Us Being Cute 📸💖</h2>
+
+      <div class="gallery">
+        <!-- ✏️ THESE MUST MATCH YOUR FILE NAMES -->
+        <img src="photo1.jpg" alt="Photo 1" />
+        <img src="photo2.jpg" alt="Photo 2" />
+        <img src="photo3.jpg" alt="Photo 3" />
+        <img src="photo4.jpg" alt="Photo 4" />
+        <img src="photo5.jpg" alt="Photo 5" />
+        <img src="photo6.jpg" alt="Photo 6" />
+      </div>
+
+      <button onclick="nextSlide()">Next ➜</button>
+    </section>
+
+    <!-- =====================
+         SLIDE 4: SWEET MESSAGE
+         ===================== -->
+    <section class="slide">
+      <h2>For My Favorite Human 🧸💗</h2>
+
+      <div class="center-box">
+        <!-- ✏️ EDIT THIS PARAGRAPH -->
+        <p>
+          Adiii, loving you feels like warm sunlight through curtains,
+          soft playlists at midnight, and laughing until nothing else
+          exists. You make ordinary days feel special, and special days
+          feel magical. I’m really lucky you’re mine 💖✨
+        </p>
+
+        <p>
+          This page is basically a digital hug wrapped in hearts,
+          teddy bears, and us 🧸💞
+        </p>
+      </div>
+
+      <button onclick="nextSlide()">Next ➜</button>
+    </section>
+
+    <!-- =====================
+         SLIDE 5: SURPRISE BUTTON
+         ===================== -->
+    <section class="slide">
+      <h2> meraa betuuu 💌</h2>
+
+      <div class="center-box">
+        <p>
+          A small present from me to you
+website banana sikh gyi sabse pehle tere liye bnayi chuggii		  😌💗
+        </p>
+
+        <button onclick="openLetter()">Open My Heart 💖</button>
+      </div>
+    </section>
+
+    <!-- =====================
+         SLIDE 6: FINAL LOVE
+         ===================== -->
+    <section class="slide">
+      <h2>I Choose You 💞</h2>
+
+      <div class="center-box">
+        <!-- ✏️ EDIT THIS FINAL MESSAGE -->
+        <p>
+          Out of all the people, all the timelines, all the possibilities,
+          I’d still pick you. Every time. No hesitation.
+        </p>
+
+        <p>
+          Happy Valentine’s Week, bachaa🧸💖  
+          I love you more than words (and websites) can explain.
+        </p>
+
+        <div class="big-heart">💗</div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- =====================
+       NAV BUTTONS
+       ===================== -->
+  <div class="nav">
+    <button onclick="prevSlide()">⬅ Prev</button>
+    <button onclick="nextSlide()">Next ➜</button>
+  </div>
+
+  <!-- =====================
+       LOVE LETTER POPUP
+       ===================== -->
+  <div class="letter-overlay" id="letterOverlay">
+    <div class="letter">
+      <h3>My Love Letter To You 💌</h3>
+
+      <!-- ✏️ EDIT THIS LETTER -->
+      <p>
+  You make every day special, and this one year with you has been full of love and beautiful memories.<br>
+  Every moment with you feels warm, safe, and happy.<br>
+  I’ve taken care of every gift you gave me because each one reminds me of you.<br>
+  You’ve supported me and stayed by my side no matter what.<br>
+  This year with you has been one of the best parts of my life.<br>
+  You truly are the best gift God has ever given me. yarrr i really love youu bachaa. 
+Tere bare me sochna band hi nhi kr pati. Bas sath reh zindagi bhar shadi kr mujhse
+Just stay by my side. i love you  💖
+
+      </p>
+
+      <button class="close-btn" onclick="closeLetter()">Close 💗</button>
+    </div>
+  </div>
+
+  <script>
+    /* =====================
+       SLIDES LOGIC
+       ===================== */
+    let currentSlide = 0;
+    const slides = document.getElementById("slides");
+    const totalSlides = document.querySelectorAll(".slide").length;
+
+    function updateSlide() {
+      slides.style.transform = `translateX(-${currentSlide * 100}vw)`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    /* =====================
+       LOVE LETTER POPUP
+       ===================== */
+    function openLetter() {
+      document.getElementById("letterOverlay").style.display = "flex";
+    }
+
+    function closeLetter() {
+      document.getElementById("letterOverlay").style.display = "none";
+    }
+
+    /* =====================
+       FLOATING HEARTS + TEDDIES
+       ===================== */
+    const floatEmojis = ["💗", "💖", "💕", "💞", "🧸", "🐻", "🌸"];
+
+    function createFloat() {
+      const span = document.createElement("span");
+      span.classList.add("float");
+      span.innerText = floatEmojis[Math.floor(Math.random() * floatEmojis.length)];
+      span.style.left = Math.random() * 100 + "vw";
+      span.style.fontSize = 18 + Math.random() * 22 + "px";
+      span.style.animationDuration = 6 + Math.random() * 6 + "s";
+      document.body.appendChild(span);
+
+      setTimeout(() => {
+        span.remove();
+      }, 12000);
+    }
+
+    setInterval(createFloat, 500);
+
+    /* =====================
+       FLOATING PHOTOS
+       ===================== */
+    const photoFiles = [
+      "photo1.jpg",
+      "photo2.jpg",
+      "photo3.jpg",
+      "photo4.jpg",
+      "photo5.jpg",
+      "photo6.jpg"
+    ];
+
+    function createFloatingPhoto() {
+      const img = document.createElement("img");
+      img.src = photoFiles[Math.floor(Math.random() * photoFiles.length)];
+      img.classList.add("photo-float");
+      img.style.left = Math.random() * 100 + "vw";
+      img.style.animationDuration = 10 + Math.random() * 10 + "s";
+      document.body.appendChild(img);
+
+      setTimeout(() => {
+        img.remove();
+      }, 20000);
+    }
+
+    setInterval(createFloatingPhoto, 2000);
+  </script>
+
+</body>
+</html>
